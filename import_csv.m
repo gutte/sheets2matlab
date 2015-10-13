@@ -3,6 +3,8 @@
 % read in a "multidimensional" csv file to matlab
 % various position parameters (dimensions) are specified manually
 %
+% subjectID (                   vector of subject id strings
+%       [subject index] )       row number (index)
 %
 % ts (                          timestamps for phase markers
 %
@@ -94,6 +96,10 @@ clear mpf;
 
 % ---------- Start reading csv
 
+
+% read subjectID strings from Rep 1 data sheet
+
+% not yet implemented
 
 % read data
 
