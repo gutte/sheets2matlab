@@ -27,7 +27,7 @@
 %
 %       [subject index],        "row" number (indexed in subjectIDs)
 %       [time],                 1: pre, 2: mid, 3: post
-%       [phase],                1: C1-C2, 2: C3-C4, 3: C1-C4
+%       [phase],                1: C1-C2, 2: C3-C4
 %       [emg],                  1-3
 %       [load],                 1: old, 2: new
 %       [set],                  1-2
@@ -66,7 +66,7 @@ rms_offset(3,1) = 61;
 rms_offset(3,2) = 67;
 rms_offset(3,3) = 73;
 
-% mpf: phases 1:C1-C2, 2: C3-C4, 3: C1-C4
+% mpf: phases 1:C1-C2, 2: C3-C4
 % mpf_offset(phase, emg)
 mpf_offset(1,1) = 79;
 mpf_offset(1,2) = 85;
@@ -78,6 +78,9 @@ mpf_offset(2,3) = 109;
 
 % determine set and load starting points (-1 row)
 % (dimensions are offset by rows in csv file)
+% this assumes:
+% 2 rows before first data matrix
+% 5 rows between data matrices
 
 % row_offset(load, set)   (load 1:old 2: new)
 row_offset(1,1) = 1;
@@ -103,18 +106,18 @@ for rep = 1:reps
         for set = 1:2
             for cursor = 1:4
                 ts(:,:,cursor,load,set,rep) = dlmread (sheet,",",[row_offset(load,set)+1, ts_offset(cursor), row_offset(load,set)+N, ts_offset(cursor)+2 ]);
-            endfor
+            end
             for emg = 1:3
                 for phase = 1:3
                     rms(:,:,phase,emg,load,set,rep) = dlmread (sheet,",",[row_offset(load,set)+1, rms_offset(phase,emg), row_offset(load,set)+N, rms_offset(phase,emg)+2 ]);
-                endfor
+                end
                 for phase = 1:2
                     mpf(:,:,phase,emg,load,set,rep) = dlmread (sheet,",",[row_offset(load,set)+1, mpf_offset(phase,emg), row_offset(load,set)+N, mpf_offset(phase,emg)+2 ]);
-                endfor
-            endfor
-        endfor
-    endfor
-endfor
+                end
+            end
+        end
+    end
+end
 
 % replace all zeros with NaN
 % (should fix "emptyvalue" parameter in dlmread)

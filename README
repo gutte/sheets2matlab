@@ -1,0 +1,16 @@
+Some scripts for
+    - importing complex (=multidimensional) spreadsheets into matlab/octave
+    - pivoting (permute) and exporting to csv files
+
+The xlsc <--> csv exports are done outside matlab.
+
+
+convert spreadsheet to csv using xlsx2csv [github.com/dilshod/xlsx2csv]
+    command: xlsx2csv -a source.xlsx csvdir
+
+set some parameters manually in
+    import_csv.m
+
+run export csv
+    export_csv.m
+    - this does the permutation to desired dimensions and exports to multiple csv files
