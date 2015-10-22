@@ -36,9 +36,8 @@
 
 % ---------- edit parameters manually here
 
-N = 20;          % number of subjects
-
-csvdir = 'csv/';  % directory of csv files
+N = 16;          % number of subjects
+csvdir = 'csv_ES/';  % directory of csv files
     
 reps = 12;       % number of reps (sheets)
 
@@ -76,18 +75,27 @@ mpf_offset(2,2) = 103;
 mpf_offset(2,3) = 109;
 
 
-% determine set and load starting points (-1 row)
+% determine set and load starting points
+% (row number seen in spreadsheet app -2)
 % (dimensions are offset by rows in csv file)
 % this assumes:
 % 2 rows before first data matrix
 % 5 rows between data matrices
 
 % row_offset(load, set)   (load 1:old 2: new)
+%{
+% relative positions
 row_offset(1,1) = 1;
 row_offset(1,2) = 6+N;
 row_offset(2,1) = 11+2*N;
 row_offset(2,2) = 16+3*N;
+%}
 
+% absolute positions
+row_offset(1,1) = 1;
+row_offset(1,2) = 26;
+row_offset(2,1) = 51;
+row_offset(2,2) = 76;
 
 % ---------- empty old variables
 
